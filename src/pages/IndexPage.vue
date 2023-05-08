@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-lg">
+  <NidGenerate/>
+  <q-page class="q-pa-lg feilds">
     <div class="row q-col-gutter-md">
       <div class="col-6">
         <q-input :rules="[val => !!val || 'Field is required']" v-model="nidDataFeilds.nameBangla" dense outlined
@@ -18,8 +19,16 @@
           hint="mother name in bangla"></q-input>
       </div>
       <div class="col-6">
+        <q-input :rules="[val => !!val || 'Field is required']" v-model="nidDataFeilds.bloodGroup" dense outlined
+          hint="Blood Group"></q-input>
+      </div>
+      <div class="col-6">
         <q-input :rules="[val => !!val || 'Field is required']" v-model="nidDataFeilds.dathOfBirth" dense outlined
           hint="date of birth in english 27 mar 2023"></q-input>
+      </div>
+      <div class="col-6">
+        <q-input :rules="[val => !!val || 'Field is required']" v-model="nidDataFeilds.birthPlace" dense outlined
+          hint="Birth place in bangla"></q-input>
       </div>
       <div class="col-6">
         <q-input :rules="[val => !!val || 'Field is required']" v-model="nidDataFeilds.nidNo" dense outlined
@@ -89,6 +98,7 @@ import { reactive, ref } from 'vue'
 import { useNidDataFeilds } from 'stores/dataStore'
 import { useActivation } from 'src/stores/dataStore';
 import { useRouter } from 'vue-router';
+import NidGenerate from 'src/pages/NidGenerate.vue';
 const activatorStore = useActivation()
 const router = useRouter()
 
@@ -124,3 +134,8 @@ const updateBarcode = () => {
   }, 0)
 }
 </script>
+<style>
+.feilds{
+  margin-top: -300px;
+}
+</style>

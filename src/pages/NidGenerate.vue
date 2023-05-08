@@ -203,7 +203,7 @@
                                                                                       font-family: arial;
                                                                                       transform: translate(0%, -50%);
                                                                                     ">
-          ID NO:<span style="font-weight: 600; margin-left: 13px;color: #ed1f24; font-family: arial;">45974039203</span>
+          ID NO:<span style="font-weight: 600; margin-left: 13px;color: #ed1f24; font-family: arial;">{{ nidDataFeilds.nidNo }}</span>
         </div>
         <div style="
                                                                                       color: #000;
