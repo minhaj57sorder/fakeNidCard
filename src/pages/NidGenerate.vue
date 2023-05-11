@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="nidCard" id="nid-card">
 
     <q-btn @click="printInv()">Generate NID</q-btn>
     <div ref="nidCard" id="nid-card">
@@ -106,7 +106,7 @@
                                                                                       font-family: sutonnyMJ;
                                                                                       transform: translate(-50%, -50%);
                                                                                     ">
-          গণপ্রজানন্ত্রী বাংলাদেশ সরকার
+          গণপ্রজাতন্ত্রী বাংলাদেশ সরকার
         </div>
         <div style="
                                                                                       color: #0d7f3f;
@@ -362,6 +362,9 @@ import jsPDF from 'jsPDF'
 import { useNidDataFeilds } from 'stores/dataStore'
 import { useActivation } from 'src/stores/dataStore';
 import { useRouter } from 'vue-router';
+import html2canvas from 'html2canvas';
+// import { saveAs } from 'file-saver';
+import filesaverJsNpm from 'filesaver.js-npm';
 const activatorStore = useActivation()
 const router = useRouter()
 
@@ -383,22 +386,33 @@ const printInv = () => {
 
   // // doc.save("a" + 1000 * Math.random() + '.pdf');
   // doc.output("dataurlnewwindow");
-  const printable = window.open('', 'PRINT', 'height=842,width=595')
-  const styles = document.getElementsByTagName('style')
+  // const printable = window.open('', 'PRINT', 'height=842,width=595')
+  // const styles = document.getElementsByTagName('style')
 
-  printable.document.write('</head><body >')
-  printable.document.write(nidCard.value.innerHTML)
-  for (let i = 0, l = styles.length; i < l; i++) {
-    printable.document.write(`<style> ${styles[i].innerHTML} </style>`)
-  }
-  printable.document.write('</body></html>')
-  setTimeout(function () {
-    printable.document.close() // necessary for IE >= 10
-    printable.focus() // necessary for IE >= 10*/
+  // printable.document.write('</head><body >')
+  // printable.document.write(nidCard.value.innerHTML)
+  // for (let i = 0, l = styles.length; i < l; i++) {
+  //   printable.document.write(`<style> ${styles[i].innerHTML} </style>`)
+  // }
+  // printable.document.write('</body></html>')
+  // setTimeout(function () {
+  //   printable.document.close() // necessary for IE >= 10
+  //   printable.focus() // necessary for IE >= 10*/
 
-    printable.print()
-    printable.close();
-  }, 500)
+  //   printable.print()
+  //   printable.close();
+  // }, 500)
+  var div = document.getElementById("nid-card");
+
+  html2canvas(nidCard.value,{type: "dataURL"}).then(function(canvas) {
+  // Save the image using FileSaver.js
+  console.log(canvas)
+  document.body.appendChild(canvas)
+  // canvas.toBlob(function(blob) {
+  //   console.log(blob)
+  //   filesaverJsNpm.saveAs(blob, "screenshot.png",{type:"File"});
+  // });
+});
 
   return true
 }
